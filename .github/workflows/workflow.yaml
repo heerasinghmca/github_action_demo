@@ -10,9 +10,19 @@ jobs:
             print(platform.processor())
           shell: python
     
-    run-shell-command:
+    run-ruby-command:
       runs-on: ubuntu-latest
       needs: ['run-python-command']
+      steps: 
+        - uses: actions/checkout@v2
+        - name: Set up Ruby 2.6
+          uses: actions/setup-ruby@v1
+          with:
+            ruby-version: 2.6
+
+    run-shell-command:
+      runs-on: ubuntu-latest
+      needs: ['run-python-command','run-ruby-command']
       steps: 
         - name: "echo string"
           run: echo "Hello World"
