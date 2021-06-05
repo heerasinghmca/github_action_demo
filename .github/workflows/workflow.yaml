@@ -31,13 +31,24 @@ jobs:
             node -v
             npm -v
             python -v
+    
     run-action:
       runs-on: ubuntu-latest
       steps:
+        - name: list files before checkout
+          run: |
+            pwd
+            ls -a
+        - name: Taking checkout
+          uses: actions/checkout@v1
+        - name: list files after checkout
+          run: |
+            pwd
+            ls -a
         - name: Running using external actions
-          uses: actions/github-actions-hello@v1
           id: greeting
+          uses: actions/hello-world-javascript-action@v1 #here you can use branch, version or commit id
           with: 
             who-to-greet: 'Mona the Octocat'
         - name: Log Greeting Time
-          run: "echo ${{ steps.greeting.outputs.time }}"
+          run: echo "time"
