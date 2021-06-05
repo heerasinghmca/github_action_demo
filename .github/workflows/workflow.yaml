@@ -22,7 +22,7 @@ jobs:
 
     run-shell-command:
       runs-on: ubuntu-latest
-      needs: ['run-python-command','run-ruby-command']
+      needs: ['run-python-command']
       steps: 
         - name: "echo string"
           run: echo "Hello World"
