@@ -1,8 +1,5 @@
 name: "Shell Commands"
-on: 
-  push:
-  pull_request: 
-    types: ['opened', 'reopened', 'closed', 'assigned']
+on: [push]
 jobs: 
     run-python-command:
       runs-on: ubuntu-latest
