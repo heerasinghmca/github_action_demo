@@ -1,5 +1,5 @@
 name: "Shell Commands"
-on: [push]
+on: [push, pull_request]
 jobs: 
     run-python-command:
       runs-on: ubuntu-latest
