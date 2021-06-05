@@ -1,6 +1,15 @@
 name: "Shell Commands"
 on: [push]
 jobs: 
+    run-python-command:
+      runs-on: ubuntu-latest
+      steps: 
+        - name: "python command"
+          run: |
+            import platform
+            print(platform.processor())
+          shell: python
+    
     run-shell-command:
       runs-on: ubuntu-latest
       steps: 
@@ -11,9 +20,3 @@ jobs:
             node -v
             npm -v
             python -v
-        - name: "python command"
-          run: |
-            import platform
-            print(platform.processor())
-          shell: python
-          
