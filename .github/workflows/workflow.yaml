@@ -1,9 +1,13 @@
 name: "Shell Commands"
 on: 
-  repository_dispatch: 
-    types: ['build']
-  schedule:
-    - cron: "*/5 * * * *"
+  push:
+    branches:
+      - master
+      - feature/**
+  # repository_dispatch: 
+  #   types: ['build']
+  # schedule:
+  #   - cron: "*/5 * * * *"
   pull_request: 
     types: ['opened', 'reopened', 'closed', 'assigned']
 jobs: 
