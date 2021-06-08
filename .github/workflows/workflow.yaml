@@ -3,8 +3,9 @@ on:
   push:
     branches:
       - master
-      - feature/*
-      # - feature/**
+      - 'feature/*'
+      - 'feature/**'
+      - '!feature/facts'
     # branches-ignore: on of them will be used
     #   - master
     #   - feature/**
