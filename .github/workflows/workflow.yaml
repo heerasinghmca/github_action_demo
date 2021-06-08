@@ -4,6 +4,9 @@ on:
     branches:
       - master
       - feature/**
+    # branches-ignore: on of them will be used
+    #   - master
+    #   - feature/**
   # repository_dispatch: 
   #   types: ['build']
   # schedule:
