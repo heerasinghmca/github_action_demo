@@ -108,3 +108,10 @@ jobs:
         - uses: actions/labeler@v2
           with:
             repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+    create-issue-on-commit:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: adamzolyak/commit-issue-commenter-action@master
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
