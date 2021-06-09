@@ -101,3 +101,11 @@ jobs:
             who-to-greet: 'Mona the Octocat'
         - name: Log Greeting Time
           run: echo "time"
+
+    github-token:
+      triage:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/labeler@v3
+            with:
+              repo-token: "${{ secrets.GITHUB_TOKEN }}"
