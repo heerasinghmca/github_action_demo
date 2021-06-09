@@ -105,7 +105,6 @@ jobs:
     run-github-token:
         runs-on: ubuntu-latest
         steps:
-          - name: pull request action labeler
-            uses: actions/labeler@v3
-            with:
-              repo-token: ${{ secrets.GITHUB_TOKEN }}
+        - uses: actions/labeler@v2
+          with:
+            repo-token: ${{ secrets.GITHUB_TOKEN }}
