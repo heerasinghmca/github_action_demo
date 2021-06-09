@@ -106,6 +106,7 @@ jobs:
       triage:
         runs-on: ubuntu-latest
         steps:
-          - uses: actions/labeler@v3
+          - name: pull request action labeler
+            uses: actions/labeler@v3
             with:
-              repo-token: "${{ secrets.GITHUB_TOKEN }}"
+              repo-token: ${{ secrets.GITHUB_TOKEN }}
