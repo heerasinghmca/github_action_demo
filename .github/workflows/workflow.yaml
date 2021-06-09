@@ -22,7 +22,11 @@ jobs:
       runs-on: ubuntu-latest
       steps: 
         - name: env variable
-          run: echo "WORK_ENV is ${WORK_ENV}"
+          env:
+            LOCAL_ENV: NGNIX
+          run: echo "WORK_ENV is ${WORK_ENV} ${LOCAL_ENV}"
+        - name: env variable outside scope
+          run: echo "WORK_ENV is ${WORK_ENV} ${LOCAL_ENV}"
         - name: "python command"
           run: |
             import platform
