@@ -13,10 +13,10 @@ on:
   #   types: ['build']
   # schedule:
   #   - cron: "*/5 * * * *"
-  env:
-    WORK_ENV: Staging Env
   pull_request: 
     types: ['opened', 'reopened', 'closed', 'assigned']
+env:
+  WORK_ENV: Staging Env
 jobs: 
     run-python-command:
       runs-on: ubuntu-latest
