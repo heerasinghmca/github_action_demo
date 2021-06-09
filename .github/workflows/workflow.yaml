@@ -13,12 +13,16 @@ on:
   #   types: ['build']
   # schedule:
   #   - cron: "*/5 * * * *"
+  env:
+    WORK_ENV: Staging Env
   pull_request: 
     types: ['opened', 'reopened', 'closed', 'assigned']
 jobs: 
     run-python-command:
       runs-on: ubuntu-latest
       steps: 
+        - name: env variable
+          run: echo "WORK_ENV is ${WORK_ENV}"
         - name: "python command"
           run: |
             import platform
