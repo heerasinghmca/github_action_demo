@@ -102,7 +102,7 @@ jobs:
         - name: Log Greeting Time
           run: echo "time"
 
-    github-token:
+    run-github-token:
       triage:
         runs-on: ubuntu-latest
         steps:
