@@ -103,7 +103,6 @@ jobs:
           run: echo "time"
 
     run-github-token:
-      triage:
         runs-on: ubuntu-latest
         steps:
           - name: pull request action labeler
