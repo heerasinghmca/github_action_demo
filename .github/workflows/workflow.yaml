@@ -102,7 +102,7 @@ jobs:
         - name: Log Greeting Time
           run: echo "time"
 
-    run-github-token:
+    apply-github-label:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/labeler@v2
