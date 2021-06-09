@@ -16,7 +16,7 @@ on:
   pull_request: 
     types: ['opened', 'reopened', 'closed', 'assigned']
 env:
-  WORK_ENV: "${{ secrets.DB_PASS }}"
+  WORK_ENV: ${{ secrets.DB_PASS }}
 jobs: 
     run-python-command:
       runs-on: ubuntu-latest
