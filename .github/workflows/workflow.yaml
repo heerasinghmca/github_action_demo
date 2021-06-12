@@ -13,142 +13,265 @@ on:
   #   types: ['build']
   # schedule:
   #   - cron: "*/5 * * * *"
-  pull_request: 
-    types: ['opened', 'reopened', 'closed', 'assigned']
+  # pull_request: 
+  #   types: ['opened', 'reopened', 'closed', 'assigned']
 env:
   WORK_ENV: ${{ secrets.DB_PASS }}
 jobs: 
-    run-python-command:
-      runs-on: ubuntu-latest
-      steps: 
-        - name: env variable
-          env:
-            LOCAL_ENV: NGNIX
-          run: echo "WORK_ENV is ${WORK_ENV} ${LOCAL_ENV}"
-        - name: env variable outside scope
-          run: echo "WORK_ENV is ${WORK_ENV} ${LOCAL_ENV}"
-        - name: default env variables
-          run: |
-            echo "HOME is ${HOME}"
-            echo "CI is ${CI}"
-            echo "GITHUB_WORKFLOW is ${GITHUB_WORKFLOW}"
-            echo "GITHUB_RUN_ID is ${GITHUB_RUN_ID}"
-            echo "GITHUB_RUN_NUMBER is ${GITHUB_RUN_NUMBER}"
-            echo "GITHUB_JOB is ${GITHUB_JOB}"
-            echo "GITHUB_ACTION is ${GITHUB_ACTION}"
-            echo "GITHUB_ACTION_PATH is ${GITHUB_ACTION_PATH}"
-            echo "GITHUB_ACTIONS is ${GITHUB_ACTIONS}"
-            echo "GITHUB_ACTOR is ${GITHUB_ACTOR}"
-            echo "GITHUB_REPOSITORY is ${GITHUB_REPOSITORY}"
-            echo "GITHUB_EVENT_NAME is ${GITHUB_EVENT_NAME}"
-            echo "GITHUB_EVENT_PATH is ${GITHUB_EVENT_PATH}"
-            echo "GITHUB_WORKSPACE is ${GITHUB_WORKSPACE}"
-            echo "GITHUB_SHA is ${GITHUB_SHA}"
-            echo "GITHUB_REF is ${GITHUB_REF}"
-            echo "GITHUB_HEAD_REF is ${GITHUB_HEAD_REF}"
-            echo "GITHUB_BASE_REF is ${GITHUB_BASE_REF}"
-        - name: "python command"
-          run: |
-            import platform
-            print(platform.processor())
-          shell: python
+    # run-python-command:
+    #   runs-on: ubuntu-latest
+    #   timeout-minutes: 1
+    #   steps: 
+    #     - name: env variable
+    #       timeout-minutes: 1
+    #       env:
+    #         LOCAL_ENV: NGNIX
+    #       run: |
+    #           sleep 1s
+    #           echo "WORK_ENV is ${WORK_ENV} ${LOCAL_ENV}"
+    #     - name: env variable outside scope
+    #       run: echo "WORK_ENV is ${WORK_ENV} ${LOCAL_ENV}"
+    #     - name: default env variables
+    #       run: |
+    #         echo "HOME is ${HOME}"
+    #         echo "CI is ${CI}"
+    #         echo "GITHUB_WORKFLOW is ${GITHUB_WORKFLOW}"
+    #         echo "GITHUB_RUN_ID is ${GITHUB_RUN_ID}"
+    #         echo "GITHUB_RUN_NUMBER is ${GITHUB_RUN_NUMBER}"
+    #         echo "GITHUB_JOB is ${GITHUB_JOB}"
+    #         echo "GITHUB_ACTION is ${GITHUB_ACTION}"
+    #         echo "GITHUB_ACTION_PATH is ${GITHUB_ACTION_PATH}"
+    #         echo "GITHUB_ACTIONS is ${GITHUB_ACTIONS}"
+    #         echo "GITHUB_ACTOR is ${GITHUB_ACTOR}"
+    #         echo "GITHUB_REPOSITORY is ${GITHUB_REPOSITORY}"
+    #         echo "GITHUB_EVENT_NAME is ${GITHUB_EVENT_NAME}"
+    #         echo "GITHUB_EVENT_PATH is ${GITHUB_EVENT_PATH}"
+    #         echo "GITHUB_WORKSPACE is ${GITHUB_WORKSPACE}"
+    #         echo "GITHUB_SHA is ${GITHUB_SHA}"
+    #         echo "GITHUB_REF is ${GITHUB_REF}"
+    #         echo "GITHUB_HEAD_REF is ${GITHUB_HEAD_REF}"
+    #         echo "GITHUB_BASE_REF is ${GITHUB_BASE_REF}"
+    #     - name: "python command"
+    #       run: |
+    #         import platform
+    #         print(platform.processor())
+    #       shell: python
     
-    run-ruby-command:
-      runs-on: ubuntu-latest
-      needs: ['run-python-command']
-      steps: 
-        - uses: actions/checkout@v2
-        - name: Set up Ruby 2.6
-          uses: actions/setup-ruby@v1
-          with:
-            ruby-version: 2.6
+    # run-ruby-command:
+    #   runs-on: ubuntu-latest
+    #   needs: ['run-python-command']
+    #   steps: 
+    #     - uses: actions/checkout@v2
+    #     - name: Set up Ruby 2.6
+    #       uses: actions/setup-ruby@v1
+    #       with:
+    #         ruby-version: 2.6
 
-    run-shell-command:
-      runs-on: ubuntu-latest
-      needs: ['run-python-command','run-ruby-command']
-      steps: 
-        - name: "echo string"
-          run: echo "Hello World"
-        - name: "multiline script"
-          run: |
-            node -v
-            npm -v
-            python -v
+    # run-shell-command:
+    #   runs-on: ubuntu-latest
+    #   needs: ['run-python-command','run-ruby-command']
+    #   steps: 
+    #     - name: "echo string"
+    #       run: echo "Hello World"
+    #     - name: "multiline script"
+    #       run: |
+    #         node -v
+    #         npm -v
+    #         python -v
     
-    run-action:
-      runs-on: ubuntu-latest
-      steps:
-        - name: payload
-          run: echo ${{ github.event.client_payload.env }}
-        - name: list files before checkout
-          run: |
-            pwd
-            ls -a
-            echo $GITHUB_SHA
-            echo $GITHUB_REPOSITORY
-            echo $GITHUB_WORKSPACE
-            echo " ${{ github.token }}"
-        - name: Taking checkout
-          uses: actions/checkout@v1
-        - name: list files after checkout
-          run: |
-            pwd
-            ls -a
-        - name: Running using external actions
-          id: greeting
-          uses: actions/hello-world-javascript-action@v1 #here you can use branch, version or commit id
-          with: 
-            who-to-greet: 'Mona the Octocat'
-        - name: Log Greeting Time
-          run: echo "time"
+    # run-action:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - name: payload
+    #       run: echo ${{ github.event.client_payload.env }}
+    #     - name: list files before checkout
+    #       run: |
+    #         pwd
+    #         ls -a
+    #         echo $GITHUB_SHA
+    #         echo $GITHUB_REPOSITORY
+    #         echo $GITHUB_WORKSPACE
+    #         echo " ${{ github.token }}"
+    #     - name: Taking checkout
+    #       uses: actions/checkout@v1
+    #     - name: list files after checkout
+    #       run: |
+    #         pwd
+    #         ls -a
+    #     - name: Running using external actions
+    #       id: greeting
+    #       uses: actions/hello-world-javascript-action@v1 #here you can use branch, version or commit id
+    #       with: 
+    #         who-to-greet: 'Mona the Octocat'
+    #     - name: Log Greeting Time
+    #       run: echo "time"
 
-    apply-github-label:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/labeler@v2
+    # apply-github-label:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #   - uses: actions/labeler@v2
+    #     with:
+    #       repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+    # push-random-file:
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #     - name: Push a random file
+    #       run: |
+    #         pwd
+    #         ls -a
+    #         git init
+    #         git remote add origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git"
+    #         git config --global user.email "my-bot@bot.com"
+    #         git config --global user.name "my-bot"
+    #         git fetch
+    #         git checkout master
+    #         git branch --set-upstream-to=origin/master
+    #         git pull
+    #         ls -a
+    #         echo $RANDOM >> random.txt
+    #         ls -a
+    #         git add -A
+    #         git commit -m"Random file"
+    #         git push
+
+    # create-issue-on-commit:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - name: Create issue using REST API
+    #       run: |
+    #         curl --request POST \
+    #         --url https://api.github.com/repos/${{ github.repository }}/issues \
+    #         --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+    #         --header 'content-type: application/json' \
+    #         --data '{
+    #           "title": "Automated issue for commit: ${{ github.sha }}",
+    #           "body": "This issue got automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+    #           }'
+
+    # get_github_context:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - name: Get Github Context
+    #       env:
+    #         GITHUB_CONTEXT: ${{ toJson(github) }}
+    #       run: eecho $GITHUB_CONTEXT
+    #       continue-on-error: true
+    #     - name: Get Secrets Context
+    #       if: failure()
+    #       env:
+    #         SECRETS_CONTEXT: ${{ toJson(secrets) }}
+    #       run: echo $SECRETS_CONTEXT       
+    #     - name: Get Secrets Context
+    #       if: always()
+    #       env:
+    #         SECRETS_CONTEXT: ${{ toJson(secrets) }}
+    #       run: echo $SECRETS_CONTEXT
+    #     - name: Get Secrets Context
+    #       if: cancelled()
+    #       env:
+    #         SECRETS_CONTEXT: ${{ toJson(secrets) }}
+    #       run: echo $SECRETS_CONTEXT
+    #     - name: Get Secrets Context
+    #       if: success()
+    #       env:
+    #         SECRETS_CONTEXT: ${{ toJson(secrets) }}
+    #       run: echo $SECRETS_CONTEXT
+
+    # node-version:
+    #   strategy:
+    #     max-parallel: 4 # here we are limiting parallel runs to 4
+    #     matrix:
+    #       os: [ubuntu-latest,macos-latest,windows-latest]
+    #       node-version: [6, 7, 8]
+    #       architecture: ['x64']
+    #       include:
+    #         - os: windows-latest
+    #           node-version: 6
+    #           is_windows_6: "true"
+    #       exclude:
+    #         - os: ubuntu-latest
+    #           node-version: 8
+    #   runs-on: ${{ matrix.os }}
+    #   env:
+    #     IS_WINDOWS_6: ${{ matrix.is_windows_6}}
+    #   steps:
+    #   - name: Get node version before
+    #     run: |
+    #      node -v
+    #   - uses: actions/setup-node@v2
+    #     with:
+    #       node-version: ${{ matrix.node-version }}
+    #   - name: Get node version after
+    #     run: |
+    #       node -v
+    #       echo "${IS_WINDOWS_6}"
+
+  docker_steps:
+    runs-on: ubuntu-latest
+    container: 
+      image: node:16-alpine3.11
+    steps:
+      - name: Log node version
+        run: |
+          node -v
+          cat /etc/os-release
+      - name: Docker steps
+        uses: docker://node:14-alpine3.12
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          entrypoint: /bin/echo
+          args: hello world
+      - name: Log node version
+        uses: docker://node:12-alpine3.12
+        with:
+          entrypoint: /usr/local/bin/node
+          args: -v
+      - uses: actions/checkout@v2
+      - name: Print values
+        run: |
+          ls -la
+          chmod +x script.sh
+          ls -la
+      - name: Run a script
+        uses: docker://node:12-alpine3.12
+        with:
+          entrypoint: ./script.sh
+          args: 'some string'
+      - name: Send slack notification
+        uses: docker://technosophos/slack-notify
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK}}
+          SLACK_MESSAGE: Hello Slack
+          SLACK_ICON: http://example.com/icon.png
+          SLACK_CHANNEL: '#qa_channel_internal'
+          SLACK_TITLE: 'Github Actions'
+          SLACK_COLOR: '#0000ff'
 
-    push-random-file:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Push a random file
-          run: |
-            pwd
-            ls -a
-            git init
-            git remote add origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git"
-            git config --global user.email "my-bot@bot.com"
-            git config --global user.name "my-bot"
-            git fetch
-            git checkout master
-            git branch --set-upstream-to=origin/master
-            git pull
-            ls -a
-            echo $RANDOM >> random.txt
-            ls -a
-            git add -A
-            git commit -m"Random file"
-            git push
+  # node_on_docker:
+  #   runs-on: ubuntu-latest
+  #   container: 
+  #     image: node:16-alpine3.11
+  #   steps:
+  #     - name: Log node version
+  #       run: |
+  #         node -v
+  #         cat /etc/os-release
 
-    create-issue-on-commit:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Create issue using REST API
-          run: |
-            curl --request POST \
-            --url https://api.github.com/repos/${{ github.repository }}/issues \
-            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-            --header 'content-type: application/json' \
-            --data '{
-              "title": "Automated issue for commit: ${{ github.sha }}",
-              "body": "This issue got automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
-              }'
-
-    get_github_context:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Get Github Context
-          env:
-            GITHUB_CONTEXT: ${{ toJson(github) }}
-          run: echo $GITHUB_CONTEXT
+  # node_mongo_on_docker:
+  #   runs-on: ubuntu-latest
+  #   services:
+  #     app:
+  #       image: alialaa17/node-api
+  #       ports:
+  #         - 3001:3000
+  #     mongo:
+  #       image: mongo
+  #       ports:
+  #         - 27017:27017
+  #   steps:
+  #     - name: Post User
+  #       run: 'curl -X POST http://localhost:3001/api/user
+  #       -H ''Content-Type: application/json'' -d ''
+  #       {"username": "heera","address": "india"}'''
+  #     - name: Get Users
+  #       run: 'curl -X GET http://localhost:3001/api/users'
