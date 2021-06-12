@@ -149,6 +149,6 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Get Github Context
-         env:
+          env:
             GITHUB_CONTEXT: ${{ toJson(github) }}
-         run: echo $GITHUB_CONTEXT
+          run: echo $GITHUB_CONTEXT
