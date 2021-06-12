@@ -144,3 +144,11 @@ jobs:
               "title": "Automated issue for commit: ${{ github.sha }}",
               "body": "This issue got automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
               }'
+
+    get_github_context:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Get Github Context
+          env:
+            GITHUB_CONTEXT: ${{ toJson(github) }}
+          run: echo $GITHUB_CONTEXT
